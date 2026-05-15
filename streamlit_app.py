@@ -7,12 +7,10 @@ model = joblib.load('model.joblib')
 tab1, tab2, tab3, tab4 = st.tabs(['Prediction', 'About', 'Dataset', 'Model Performance'])
 
 with tab1:
-    st.title("Taxi Fares Prediction")
+    st.title("🚖 Taxi Fares Prediction")
     st.write("Aplikasi Prediksi Tarif Taksi untuk memberikan estimasi harga perjalanan yang transparan dan akurat, sehingga dapat memberikan perkiraan biaya berdasarkan jarak tempuh serta waktu keberangkatan yang dipilih.")
 
     st.divider()
-
-    st.image("./assets/taxi1.jpg", caption="Taxi Illustration")
 
     col1, col2 = st.columns(2)
 
@@ -53,15 +51,25 @@ with tab1:
             predicted_fare = model.predict(input_df)[0]
 
             if passanger_count > 1:
-                predicted_fare *= passanger_count
-                st.success(f"Prediksi Tarif: ${predicted_fare:.2f} ({predicted_fare/passanger_count:.2f} untuk 1 penumpang)")
+                st.markdown(f"""
+                <div style="background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); text-align: center;">
+                    <h3 style="color: #555; margin-bottom: 0;">Estimasi Tarif Perjalanan</h3>
+                    <h1 style="color: #2e7d32; margin: 10px 0;">${predicted_fare:.2f}</h1>
+                    <h3 style="color: #2e7d32; margin: 0;">(${predicted_fare/passanger_count:.2f} untuk 1 penumpang)</h3>
+                    <p style="color: #888; font-size: 16px; margin-top: 0;">*Harga di atas adalah estimasi dasar sebelum pajak dan biaya tol.</p>
+                </div>
+                """, unsafe_allow_html=True)
             else :
-                st.success(f"Prediksi Tarif: ${predicted_fare:.2f}")
-
-            st.write("Note: Ini adalah perkiraan tarif berdasarkan fitur yang dimasukkan dan mungkin tidak mencerminkan tarif sebenarnya untuk perjalanan tertentu.")
+                st.markdown(f"""
+                <div style="background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); text-align: center;">
+                    <h3 style="color: #555; margin-bottom: 0;">Estimasi Tarif Perjalanan</h3>
+                    <h1 style="color: #2e7d32; margin: 10px 0;">${predicted_fare:.2f} </h1>
+                    <p style="color: #888; font-size: 12px; margin-top: 0;">*Harga di atas adalah estimasi dasar sebelum pajak dan biaya tol.</p>
+                </div>
+                """, unsafe_allow_html=True)
 
 with tab2:
-    st.title("About This App")
+    st.title("ℹ️ About This App")
     st.subheader("Latar Belakang")
     st.write("Dalam industri ride-hailing dan taksi modern, transparansi harga merupakan fondasi utama dalam membangun kepercayaan pelanggan. Sering kali, calon penumpang merasa ragu untuk memesan perjalanan karena ketidakpastian biaya yang harus dibayarkan, terutama saat memasuki jam sibuk atau ketika menempuh rute jarak jauh. Ketidakpastian ini dapat menghambat keputusan pelanggan dan memengaruhi kepuasan mereka terhadap layanan.")
     
@@ -75,7 +83,7 @@ with tab2:
     st.write("Tujuan utama dari pengembangan fitur ini adalah untuk menghilangkan keraguan pelanggan dengan memberikan informasi biaya yang transparan sejak awal. Dengan adanya estimasi harga yang akurat di smartphone mereka, pelanggan dapat merencanakan perjalanan dengan lebih tenang dan efisien.")
 
 with tab3:
-    st.title("Dataset")
+    st.title("🗂️ Dataset")
     st.write("Ada 5 jenis data yang digunakan untuk training model, yaitu:")
 
     col1t2, col2t2 = st.columns(2)
@@ -104,7 +112,7 @@ with tab3:
     st.image("./assets/correlation_heatmap.png", caption="Heatmap Korelasi Antar Fitur")
 
 with tab4:
-    st.title("Model Performance")
+    st.title("📈 Model Performance")
     st.write("Model ini dievaluasi menggunakan metrik Mean Absolute Error (MAE) and R-squared (R²).")
 
     with open('assets/hasil_evaluasi.txt', 'r') as f:
