@@ -54,8 +54,8 @@ with tab1:
                 st.markdown(f"""
                 <div style="background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); text-align: center;">
                     <h3 style="color: #555; margin-bottom: 0;">Estimasi Tarif Perjalanan</h3>
-                    <h1 style="color: #2e7d32; margin: 10px 0;">${predicted_fare:.2f}</h1>
-                    <h3 style="color: #2e7d32; margin: 0;">(${predicted_fare/passanger_count:.2f} untuk 1 penumpang)</h3>
+                    <h1 style="color: #2e7d32; margin: 10px 0;">${passanger_count * predicted_fare:.2f}</h1>
+                    <h3 style="color: #2e7d32; margin: 0;">(${predicted_fare:.2f} untuk 1 penumpang)</h3>
                     <p style="color: #888; font-size: 16px; margin-top: 0;">*Harga di atas adalah estimasi dasar sebelum pajak dan biaya tol.</p>
                 </div>
                 """, unsafe_allow_html=True)
